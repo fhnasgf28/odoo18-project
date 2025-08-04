@@ -1,60 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="equip1_node8_automation.list">
-      <field name="name">equip1_node8_automation list</field>
-      <field name="model">equip1_node8_automation.equip1_node8_automation</field>
-      <field name="arch" type="xml">
-        <list>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </list>
-      </field>
-    </record>
--->
+    <data>
+        <record id="ocr_document_view_form" model="ir.ui.view">
+            <field name="name">ocr.document.form</field>
+            <field name="model">ocr.document</field>
+            <field name="arch" type="xml">
+                <form string="OCR Document">
+<!--                    <header>-->
+<!--                        <button name="action_process_document" string="Process Document" type="object" class="oe_highlight"/>-->
+<!--                    </header>-->
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" placeholder="e.g. Invoice #123"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="image_file" widget="image" filename="image_filename"/>
+                            </group>
+                            <group>
+                                <field name="excel_file" filename="excel_filename" widget="binary"/>
+                                <field name="raw_text" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="equip1_node8_automation.action_window">
-      <field name="name">equip1_node8_automation window</field>
-      <field name="res_model">equip1_node8_automation.equip1_node8_automation</field>
-      <field name="view_mode">list,form</field>
-    </record>
--->
+        <record id="ocr_document_view_tree" model="ir.ui.view">
+            <field name="name">ocr.document.tree</field>
+            <field name="model">ocr.document</field>
+            <field name="arch" type="xml">
+                <list string="OCR Documents">
+                    <field name="name"/>
+                    <field name="image_filename"/>
+                    <field name="excel_filename"/>
+                </list>
+            </field>
+        </record>
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="equip1_node8_automation.action_server">
-      <field name="name">equip1_node8_automation server</field>
-      <field name="model_id" ref="model_equip1_node8_automation_equip1_node8_automation"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "list,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
+        <record id="ocr_document_action" model="ir.actions.act_window">
+            <field name="name">OCR Documents</field>
+            <field name="res_model">ocr.document</field>
+            <field name="view_mode">list,form</field>
+        </record>
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="equip1_node8_automation" id="equip1_node8_automation.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="equip1_node8_automation.menu_1" parent="equip1_node8_automation.menu_root"/>
-    <menuitem name="Menu 2" id="equip1_node8_automation.menu_2" parent="equip1_node8_automation.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="equip1_node8_automation.menu_1_list" parent="equip1_node8_automation.menu_1"
-              action="equip1_node8_automation.action_window"/>
-    <menuitem name="Server to list" id="equip1_node8_automation" parent="equip1_node8_automation.menu_2"
-              action="equip1_node8_automation.action_server"/>
--->
-  </data>
+        <menuitem id="menu_ocr_root" name="OCR Tools" sequence="10"/>
+        <menuitem id="menu_ocr_document_list" name="Documents" parent="menu_ocr_root" action="ocr_document_action"/>
+    </data>
 </odoo>

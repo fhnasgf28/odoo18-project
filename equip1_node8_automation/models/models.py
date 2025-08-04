@@ -1,17 +1,20 @@
-# from odoo import models, fields, api
+import base64
+import io
+import pytesseract
+from PIL import Image
+from openpyxl import Workbook
+from odoo import models, fields, api
 
 
-# class equip1_node8_automation(models.Model):
-#     _name = 'equip1_node8_automation.equip1_node8_automation'
-#     _description = 'equip1_node8_automation.equip1_node8_automation'
+class OcrDocument(models.Model):
+    _name = 'ocr.document'
+    _description = 'OCR Document Processor'
+    _inherit = ['mail.thread']
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+    name = fields.Char(string='Document Name', required=True)
+    image_file = fields.Binary(string='Upload Image', required=True, attachment=True)
+    image_filename = fields.Char(string='Image Filename')
+    raw_text = fields.Text(string='Extracted Text', readonly=True)
+    excel_file = fields.Binary(string='Generated Excel', readonly=True, attachment=True)
+    excel_filename = fields.Char(string='Excel Filename')
 
