@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ocr_document_camera_button" t-inherit="web.FormRenderer" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_form_sheet')]" position="before">
+            <div t-if="props.record.resModel === 'ocr.document'" class="o_camera_container mb-3">
+                <button class="btn btn-primary open-camera-btn">
+                    <i class="fa fa-camera me-1"/> Capture Image
+                </button>
+                <div class="camera-interface d-none">
+                    <div class="camera-preview-container">
+                        <video id="camera-preview" autoplay="true" playsinline="true"></video>
+                        <canvas id="camera-canvas" class="d-none"></canvas>
+                    </div>
+                    <div class="camera-controls mt-2">
+                        <button class="btn btn-success capture-btn me-2">
+                            <i class="fa fa-camera me-1"/> Capture
+                        </button>
+                        <button class="btn btn-secondary retake-btn me-2 d-none">
+                            <i class="fa fa-refresh me-1"/> Retake
+                        </button>
+                        <button class="btn btn-danger close-camera-btn">
+                            <i class="fa fa-times me-1"/> Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>

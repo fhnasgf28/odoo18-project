@@ -28,7 +28,7 @@ Long description of module's purpose
     'assets': {
         'web.assets_backend': [
             'equip1_node8_automation/static/src/js/camera_capture.js',
-            # 'equip1_node8_automation/static/src/xml/camera_templates.xml',
+            'equip1_node8_automation/static/src/xml/camera_template.xml',
         ],
     },
     # only loaded in demonstration mode
@@ -36,4 +36,3 @@ Long description of module's purpose
         'demo/demo.xml',
     ],
 }
-
