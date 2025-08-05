@@ -16,6 +16,10 @@
                         <group>
                             <group>
                                 <field name="image_file" widget="image" filename="image_filename"/>
+                                <div>
+                                    <input type="file" name="camera_input" accept="image/*" capture="camera" id="camera-input" class="btn btn-primary mt-2"/>
+                                    <label for="camera-input" class="btn btn-primary mt-2">Ambil Gambar</label>
+                                </div>
                             </group>
                             <group>
                                 <field name="excel_file" filename="excel_filename" widget="binary"/>
