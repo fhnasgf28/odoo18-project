@@ -28,10 +28,21 @@ class TelegramWebhookController(http.Controller):
 
                 if action == 'approve':
                     PurchaseOrder.button_approve()
+                    # pastikan perubahan tersimpan sebelum memanggil API Telegram
+                    request.env.cr.commit()
                     final_text = f"✅ PO {PurchaseOrder.name} telah disetujui."
                 elif action == 'reject':
-                    PurchaseOrder.button_cancel()
-                    final_text = f"❌ PO {PurchaseOrder.name} telah ditolak."
+                    try:
+                        PurchaseOrder.button_cancel()
+                        request.env.cr.commit()
+                        final_text = f"❌ PO {PurchaseOrder.name} telah ditolak."
+                    except Exception as cancel_err:
+                        _logger.exception("Gagal membatalkan PO %s: %s", PurchaseOrder.name, cancel_err)
+                        # Jika batal gagal (contoh: ada vendor bill yang belum dibatalkan)
+                        final_text = (
+                            f"⚠️ Gagal menolak PO {PurchaseOrder.name}.\n"
+                            f"Alasan: {str(cancel_err)}"
+                        )
                 else:
                     final_text = "Tindakan tidak dikenali."
                 self._update_telegram_message(chat_id, message_id, final_text)
@@ -67,4 +78,3 @@ class TelegramWebhookController(http.Controller):
             'reply_markup': json.dumps({})  # Menghapus keyboard
         }
         requests.post(api_url, json=payload, timeout=5)
-
