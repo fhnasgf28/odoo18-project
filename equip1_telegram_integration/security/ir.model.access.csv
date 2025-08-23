@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_equip1_telegram_integration_equip1_telegram_integration,equip1_telegram_integration.equip1_telegram_integration,model_equip1_telegram_integration_equip1_telegram_integration,base.group_user,1,1,1,1
