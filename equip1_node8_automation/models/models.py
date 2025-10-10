@@ -219,5 +219,6 @@ class OcrDocument(models.Model):
                 'message': message,
                 'sticky': False,
                 'type': type_msg,
+                'tag': 'reload'
             }
         }

@@ -1,60 +1,14 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="equip1_telegram_integration.list">
-      <field name="name">equip1_telegram_integration list</field>
-      <field name="model">equip1_telegram_integration.equip1_telegram_integration</field>
-      <field name="arch" type="xml">
-        <list>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </list>
-      </field>
+    <record id="purchase_order_form_telegram_feedback" model="ir.ui.view">
+        <field name="name">purchase.order.form.telegram.feedback</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Telegram Feedback" name="telegram_feedback_group" invisible="state != 'cancel'">
+                    <field name="feedback" nolabel="1" placeholder="Alasan penolakan dari Telegram"/>
+                </group>
+            </xpath>
+        </field>
     </record>
--->
-
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="equip1_telegram_integration.action_window">
-      <field name="name">equip1_telegram_integration window</field>
-      <field name="res_model">equip1_telegram_integration.equip1_telegram_integration</field>
-      <field name="view_mode">list,form</field>
-    </record>
--->
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="equip1_telegram_integration.action_server">
-      <field name="name">equip1_telegram_integration server</field>
-      <field name="model_id" ref="model_equip1_telegram_integration_equip1_telegram_integration"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "list,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
-
-    <!-- Top menu item -->
-<!--
-    <menuitem name="equip1_telegram_integration" id="equip1_telegram_integration.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="equip1_telegram_integration.menu_1" parent="equip1_telegram_integration.menu_root"/>
-    <menuitem name="Menu 2" id="equip1_telegram_integration.menu_2" parent="equip1_telegram_integration.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="equip1_telegram_integration.menu_1_list" parent="equip1_telegram_integration.menu_1"
-              action="equip1_telegram_integration.action_window"/>
-    <menuitem name="Server to list" id="equip1_telegram_integration" parent="equip1_telegram_integration.menu_2"
-              action="equip1_telegram_integration.action_server"/>
--->
-  </data>
 </odoo>
